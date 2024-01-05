@@ -1,0 +1,40 @@
+.weather-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .weather {
+    margin-top: 20px;
+  }
+  
+  .topic {
+    color: #2196f3;
+  }
+  
+  .chart {
+    margin-top: 20px;
+  }
+  
+  .current {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .min,
+  .max,
+  .humidity,
+  .visibility,
+  .wind {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .error-message {
+    color: #f44336;
+  }
+
+  h1 {
+    color: rgb(37, 37, 101);
+  }
+  

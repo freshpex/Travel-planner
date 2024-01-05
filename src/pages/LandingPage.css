@@ -1,0 +1,58 @@
+.landing-page {
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    background: url('../assets/travel.gif') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+h2 {
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: white;
+}
+
+.btn-get-started {
+    margin-top: 1em;
+    padding: 10px 20px;
+    background:  #4154f1;;
+    color: white;
+    border-radius: 50px;
+    transition: all 0.5s ease;
+}
+
+.btn-get-started:hover {
+    background: white;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+}
