@@ -14,7 +14,7 @@ const Attraction = () => {
   const navigate = useNavigate();
   const [filteredAttractions, setFilteredAttractions] = useState(null);
   const [selectedAttraction, setSelectedAttraction] = useState(null);
-  const auth = 'fsq3gQf0Sj0C+60Y1WjGjD+3WyiTn47O4F8rDIZYndDk+v4=';
+  const auth = import.meta.env.VITE_REACT_APP_AUTH;
 
   const handleSearch = (filteredAttractions) => {
     setFilteredAttractions(filteredAttractions);
@@ -61,7 +61,7 @@ const Attraction = () => {
     };
 
     fetchAttractions();
-  }, [country]);
+  }, [auth, country]);
 
   const [sortOrder, setSortOrder] = useState('asc');
   const handleToggleSortOrder = () => {
