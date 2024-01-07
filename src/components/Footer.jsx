@@ -1,73 +1,119 @@
-import "react";
+import React from 'react';
+import './Footer.css';
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
 
-const FooterLinks = [
-  {
-    head: "Company",
-    links: ["About", "Careers", "Blog"],
-  },
-  {
-    head: "Contact",
-    links: ["Help/FAQ", "Press", "Affiliates"],
-  },
-  {
-    head: "More",
-    links: ["Airliefees", "Airline", "Low fare tips"],
-  },
-];
 function Footer() {
   return (
-    <div className="container mx-auto grid md:grid-cols-10 md:grid-rows-2 md:items-start mt-20 md:mt-28 lg:mt-40">
-      <div className="md:col-span-4 lg:col-span-3">
-        <Logo2 className="mx-auto md:mx-0" />
-      </div>
-      <div className="md:col-span-5 md:row-span-2 lg:col-span-4 flex flex-col md:flex-row items-center justify-around mb-2">
-        {FooterLinks.map((link,i) => {
-          return (
-            <div className="text-center md:text-left" key={i}>
-              <h1 className="font-bold">{link.head}</h1>
-              <div className="flex flex-col gap-2 mt-4">
-                {link.links.map((link,index) => {
-                  return (
-                    <a href="#" className="font-light " key={index}>
-                      {link}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      <div className="flex flex-col items-center md:col-span-4  md:block lg:col-span-3">
-        <div className="flex gap-2">
-          <div className="w-10 h-10 shadow-md bg-white grid place-items-center rounded-full">
-            <Facebook />
+    <div className='footer-container'>
+      <section className='footer-subscription'>
+        <p className='footer-subscription-heading'>
+          Join the Adventure newsletter to receive our best vacation deals
+        </p>
+        <p className='footer-subscription-text'>
+          You can unsubscribe at any time.
+        </p>
+        <div className='input-areas'>
+          <form>
+            <input
+              className='footer-input'
+              name='email'
+              type='email'
+              placeholder='Your Email'
+            />
+            <Button buttonStyle='btn--outline'>Subscribe</Button>
+          </form>
+        </div>
+      </section>
+      <div className='footer-links'>
+        <div className='footer-link-wrapper'>
+          <div className='footer-link-items'>
+            <h2>About Us</h2>
+            <Link to='/sign-up'>How it works</Link>
+            <Link to='/'>Testimonials</Link>
+            <Link to='/'>Careers</Link>
+            <Link to='/'>Investors</Link>
+            <Link to='/'>Terms of Service</Link>
           </div>
-          <div className="w-10 h-10 shadow-md angular grid place-items-center rounded-full">
-            <Instagram />
+          <div className='footer-link-items'>
+            <h2>Contact Us</h2>
+            <Link to='/'>Contact</Link>
+            <Link to='/'>Support</Link>
+            <Link to='/'>Destinations</Link>
+            <Link to='/'>Sponsorships</Link>
           </div>
-          <div className="w-10 h-10 shadow-md bg-white grid place-items-center rounded-full">
-            <Twitter />
+        </div>
+        <div className='footer-link-wrapper'>
+          <div className='footer-link-items'>
+            <h2>Videos</h2>
+            <Link to='/'>Submit Video</Link>
+            <Link to='/'>Ambassadors</Link>
+            <Link to='/'>Agency</Link>
+            <Link to='/'>Influencer</Link>
+          </div>
+          <div className='footer-link-items'>
+            <h2>Social Media</h2>
+            <Link to='/'>Instagram</Link>
+            <Link to='/'>Facebook</Link>
+            <Link to='/'>Youtube</Link>
+            <Link to='/'>Twitter</Link>
           </div>
         </div>
       </div>
-    </div>
-  );
-      }
-
-function StoreBtn({ Icon, headText, footText, play = true }) {
-  return (
-    <div className="rounded-3xl bg-black text-white flex py-1 px-3 items-center gap-0.5">
-      {Icon}
-      <div className="flex flex-col">
-        <h3 className={`${play ? "uppercase text-bold text-xs" : "text-xs font-bold"}`}>
-          {headText}
-        </h3>
-        <h2 className={`${play ? "font-light text-xs" : "font-bold text-xs"}`}>
-          {footText}
-        </h2>
-      </div>
+      <section className='social-media'>
+        <div className='social-media-wrap'>
+          <div className='footer-logo'>
+            <Link to='/' className='social-logo'>
+              TRVL <i className="fab fa-gripfire"></i>
+            </Link>
+          </div>
+          <small className='website-rights'>TRVL © 2022</small>
+          <div className='social-icons'>
+            <Link
+              className='social-icon-link facebook'
+              to='/'
+              target='_blank'
+              aria-label='Facebook'
+            >
+              <i className='fab fa-facebook-f' />
+            </Link>
+            <Link
+              className='social-icon-link instagram'
+              to='/'
+              target='_blank'
+              aria-label='Instagram'
+            >
+              <i className='fab fa-instagram' />
+            </Link>
+            <Link
+              className='social-icon-link youtube'
+              to='/'
+              target='_blank'
+              aria-label='Youtube'
+            >
+              <i className='fab fa-youtube' />
+            </Link>
+            <Link
+              className='social-icon-link twitter'
+              to='/'
+              target='_blank'
+              aria-label='Twitter'
+            >
+              <i className='fab fa-twitter' />
+            </Link>
+            <Link
+              className='social-icon-link twitter'
+              to='/'
+              target='_blank'
+              aria-label='LinkedIn'
+            >
+              <i className='fab fa-linkedin' />
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
 export default Footer;
