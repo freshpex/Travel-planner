@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Button } from './Button';
 import './Navbar.css'
@@ -12,16 +12,18 @@ import ProtectedRoute from '../Context/PrivateRoute';
 import LoginForm from '../pages/LoginPage';
 import Logout from '../pages/Logout';
 import ScrollToTop from './ScrollToTop';
+import GlobalContext from '../Context/GlobalContext'; 
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const { token } = useContext(GlobalContext);
 
   const handleClick = () => setClick(!click); 
   const closeMobileMenu = () => setClick(false);
 
   const showButton = () => {
-    if(window.innerWidth <= 960) {
+    if (window.innerWidth <= 960) {
       setButton(false);
     } else {
       setButton(true);
@@ -35,7 +37,7 @@ const Navbar = () => {
   window.addEventListener('resize', showButton);
 
   return (
-    <>
+    <div>
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
@@ -47,11 +49,6 @@ const Navbar = () => {
           </div>
 
           <ul className={ click ? 'nav-menu active': 'nav-menu' }>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={ closeMobileMenu } >
-                Home
-              </Link>
-            </li>
             <li className='nav-item'>
               <Link to='/dashboard' className='nav-links' onClick={ closeMobileMenu } >
               Dashboard
@@ -72,17 +69,26 @@ const Navbar = () => {
               Attractions
               </Link>
             </li>
+            {token ? (
             <li className='nav-item'>
-              <Link to='/login' className='nav-links-mobile' onClick={ closeMobileMenu } >
-                Login
+              <Link to='/logout' className='nav-links-mobile' onClick={ closeMobileMenu } >
+                Logout
               </Link>
             </li>
+            ) : (
+              <li className='nav-item'>
+                <Link to='/login' className='nav-links-mobile' onClick={ closeMobileMenu } >
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
-          { button && <Button buttonStyle='btn--outline'>Login</Button>}
-          </div>
+          {button && !token && <Button buttonStyle='btn--outline'>Login</Button>}
+          {button && token && <Button buttonStyle='btn--outline'>Logout</Button>}
+        </div>
       </nav>
 
-      <ScrollToTop>
+    <ScrollToTop>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route 
@@ -108,9 +114,9 @@ const Navbar = () => {
                     <Attraction />
                 </ProtectedRoute>} />
       </Routes>
-      </ScrollToTop>
-    </>
+    </ScrollToTop>
+    </div>
   );
-};
+}
 
 export default Navbar;

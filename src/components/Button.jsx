@@ -20,13 +20,12 @@ export const Button = ({
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
   
   return (
-    <Link to='/sign-up' className='btn-mobile'>
+    <Link to='/logout' className='btn-mobile'>
       <button
       className={`btn ${checkButtonStyle} ${checkButtonSize}`}
       onClick={onClick}
       type={type}
       >
-        { /* whatever you put inside this component, it will render it via 'children 'prop*/ }
         {children} 
       </button>
     </Link>

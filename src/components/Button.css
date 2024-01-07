@@ -12,7 +12,7 @@
 
 .btn--primary {
   background-color: var(--primary);
-  color: #242424;
+  color: #4154f1;
   border: 1px solid var(--primary);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .btn--cta {
-  background-color: #242424;
+  background-color: #4154f1;
   color: var(--primary);
   border: 1px solid var(--primary);
 }
@@ -42,7 +42,7 @@
 
 .btn--medium:hover,  .btn--large:hover {
   background: #fff;
-  color: #242424;
+  color: #4154f1;
   transition: all 0.3s ease-out;
 }
 
@@ -53,7 +53,7 @@
 
 .btn--cta:hover {
   background-color: #fff;
-  color: #242424;
+  color: #4154f1;
   border: 1px solid #242424;
 }
 

@@ -14,7 +14,7 @@ const Weather = () => {
   const [humidity, setHumidity] = useState(null);
   const [visibility, setVisibility] = useState(null);
   const [windSpeed, setWindSpeed] = useState(null);
-  const api_key = "3142b0f410ebe4532dddff736e20208f";
+  const api_key = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY;
 
   document.title = `Travel Planner - ${country}`;
 
@@ -60,7 +60,7 @@ const Weather = () => {
     };
 
     fetchWeather();
-  }, [country]);
+  }, [api_key, country]);
 
   return (
     <div className="weather-container">

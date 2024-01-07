@@ -19,7 +19,7 @@ const Hotel = () => {
     setPriceFilter({ min, max });
   };
 
-  const apikey = '8ddcfe6c2amshc954c57b535def3p1171a3jsn3fde2e169987';
+  const apikey = import.meta.env.VITE_REACT_APP_HOTEL_API_KEY;
 
   document.title = `Travel Planner - ${country}`;
 
@@ -29,6 +29,7 @@ const Hotel = () => {
     }
   }, [country, navigate]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getRegionId = async (country) => {
     const locationSearchUrl = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${country}&locale=en_US&langid=1033&siteid=300000001`;
 
@@ -129,7 +130,7 @@ const Hotel = () => {
     };
 
     fetchHotels();
-  }, [country, priceFilter.min, priceFilter.max]);
+  }, [country, priceFilter.min, priceFilter.max, apikey, getRegionId]);
 
   const [sortOrder, setSortOrder] = useState('asc');
   const handleToggleSortOrder = () => {

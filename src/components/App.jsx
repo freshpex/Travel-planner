@@ -4,6 +4,7 @@ import CountryContext from '../Context/CountryContext';
 import { GlobalProvider } from '../Context/GlobalContext';
 import './App.css'
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const App = () => {
   const [country, setCountry] = useState(localStorage.getItem('country') || "");
@@ -18,6 +19,7 @@ const App = () => {
         <GlobalProvider>
           <Router>
             <Navbar />
+            <Footer />
           </Router>
         </GlobalProvider>
       </CountryContext.Provider>
