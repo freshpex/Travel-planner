@@ -1,37 +1,36 @@
-import { useState, useContext } from 'react';
-import GlobalContext from '../Context/GlobalContext';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import '../components/App.css'
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from '../Context/firebase-init';
 
 const LoginForm = (props) => {
-  const { setToken } = useContext(GlobalContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     setErrorMessage('');
 
-    const response = await fetch('https://freshpex-auth-server.onrender.com/session', { 
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-
-    setIsLoading(false);
-
-    if (response.ok) {
-      const { token } = await response.json();
-      setToken(token);
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setIsLoading(false);
       navigate('/dashboard');
-    } else {
-      setErrorMessage('Incorrect Login Details'); 
+    } catch (error) {
+      setIsLoading(false);
+      setErrorMessage('Incorrect Login Details');
     }
   };
+
+  if (user) {
+    navigate('/dashboard');
+    return null;
+  }
 
   return (
     <div className='form-modal__container'>
@@ -65,6 +64,8 @@ const LoginForm = (props) => {
           </form>
         </div>
     </div>
+    <p> Do not have an account? <Link to="/signup">Sign up here</Link>
+      </p>
   </div>
   );
 };

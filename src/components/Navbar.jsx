@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Button } from './Button';
 import './Navbar.css'
@@ -10,14 +10,16 @@ import Attraction from './Attraction';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ProtectedRoute from '../Context/PrivateRoute';
 import LoginForm from '../pages/LoginPage';
+import Signup from '../pages/SignupPage';
 import Logout from '../pages/Logout';
 import ScrollToTop from './ScrollToTop';
-import GlobalContext from '../Context/GlobalContext'; 
+import { useAuthState } from 'react-firebase-hooks/auth';  // Add this import
+import auth from '../Context/firebase-init';  // Add this import
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-  const { token } = useContext(GlobalContext);
+  const [user] = useAuthState(auth);  // Get the user's authentication status
 
   const handleClick = () => setClick(!click); 
   const closeMobileMenu = () => setClick(false);
@@ -51,30 +53,30 @@ const Navbar = () => {
           <ul className={ click ? 'nav-menu active': 'nav-menu' }>
             <li className='nav-item'>
               <Link to='/dashboard' className='nav-links' onClick={ closeMobileMenu } >
-              Dashboard
+                Dashboard
               </Link>
             </li>
             <li className='nav-item'>
               <Link to='/weather' className='nav-links' onClick={ closeMobileMenu } >
-              Weather
+                Weather
               </Link>
             </li>
             <li className='nav-item'>
               <Link to='/hotels' className='nav-links' onClick={ closeMobileMenu } >
-              Hotels
+                Hotels
               </Link>
             </li>
             <li className='nav-item'>
               <Link to='/attractions' className='nav-links' onClick={ closeMobileMenu } >
-              Attractions
+                Attractions
               </Link>
             </li>
-            {token ? (
-            <li className='nav-item'>
-              <Link to='/logout' className='nav-links-mobile' onClick={ closeMobileMenu } >
-                Logout
-              </Link>
-            </li>
+            {user ? (
+              <li className='nav-item'>
+                <Link to='/logout' className='nav-links-mobile' onClick={ closeMobileMenu } >
+                  Logout
+                </Link>
+              </li>
             ) : (
               <li className='nav-item'>
                 <Link to='/login' className='nav-links-mobile' onClick={ closeMobileMenu } >
@@ -83,8 +85,8 @@ const Navbar = () => {
               </li>
             )}
           </ul>
-          {button && !token && <Button buttonStyle='btn--outline'>Login</Button>}
-          {button && token && <Button buttonStyle='btn--outline'>Logout</Button>}
+          {button && user && <Button buttonStyle='btn--outline'>Logout</Button>}
+          {button && !user && <Button buttonStyle='btn--outline'>Login</Button>}
         </div>
       </nav>
 
@@ -94,6 +96,9 @@ const Navbar = () => {
         <Route 
             path="/login" 
             element={<LoginForm />} />
+        <Route 
+            path="/signup" 
+            element={<Signup />} />
         <Route 
             path="/logout" 
             element={<Logout />} />

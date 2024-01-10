@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
 import CountryContext from '../Context/CountryContext';
-import { GlobalProvider } from '../Context/GlobalContext';
 import './App.css'
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -16,12 +15,10 @@ const App = () => {
   return (
     <div className='App'>
       <CountryContext.Provider value={{ country, setCountry }}>
-        <GlobalProvider>
-          <Router>
-            <Navbar />
-            <Footer />
-          </Router>
-        </GlobalProvider>
+        <Router>
+          <Navbar />
+          <Footer />
+        </Router>
       </CountryContext.Provider>
     </div>
   );
